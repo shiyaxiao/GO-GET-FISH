@@ -22,6 +22,10 @@ class Coin {
   draw() {
     ctx.beginPath();
     ctx.drawImage(this._image, this._x, this._y, 400, 400);
-    console.log('draw');
+    console.log('coin: draw');
+  }
+
+  tick() {
+    this.draw();
   }
 }
