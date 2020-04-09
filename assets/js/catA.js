@@ -12,8 +12,8 @@ class CatA {
   constructor() {
     this._y = canvas.height - this._spriteHeight;
 
-    this.animation = new AnimationFrame(10, () => this.update());
-    this.animation.start();
+    this.animation = new AnimationFrame(15, () => this.update());
+    //this.animation.start();
 
     console.log('catA: constructor');
 

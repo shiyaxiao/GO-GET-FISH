@@ -2,7 +2,7 @@ const canvas = document.querySelector('#drawing');
 const ctx = canvas.getContext('2d');
 
 const catA = new CatA();
-const coin = new Coin(500, 300);
+const coin = new Coin();
 
 const tick = () => {
   console.log('Tick');
@@ -26,9 +26,9 @@ function onKeyDown(event) {
 }
 
 function onKeyUp(event) {
-//  setTimeout(() => {
-    catA.stop();
-//  }, 500);
+  //  setTimeout(() => {
+  catA.stop();
+  //  }, 500);
 }
 
 document.addEventListener('keydown', onKeyDown);

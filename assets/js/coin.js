@@ -1,12 +1,15 @@
 class Coin {
   _image;
-  _x;
-  _y;
+  _x = 500;
+  _y = 400;
+  _spriteWidth = 100;
+  _spriteHeight = 100;
+  _spriteFrames = 20;
+  _currentFrames = 0;
 
   constructor(x, y) {
-    this._x = x;
-    this._y = y;
-
+    this.animation = new AnimationFrame(18, () => this.update());
+    this.animation.start();
     this.loadImages();
   }
 
@@ -15,16 +18,35 @@ class Coin {
     this._image.onload = () => {
       this.draw();
     };
-    this._image.src = './assets/img/coin_01.png';
+    this._image.src = './assets/img/coin.png';
   }
 
   draw() {
+    const spriteX = this._spriteWidth * this._currentFrames;
+
     ctx.beginPath();
-    ctx.drawImage(this._image, this._x, this._y, 400, 400);
+    ctx.drawImage(
+      this._image,
+      spriteX,
+      0,
+      this._spriteWidth,
+      this._spriteHeight,
+      this._x,
+      this._y,
+      this._spriteWidth,
+      this._spriteHeight
+    );
     console.log('coin: draw');
   }
 
- tick() {
-   this.draw();
+  update() {
+    this._currentFrames++;
+    if (this._currentFrames % this._spriteFrames == 0) {
+      this._currentFrames = 0;
     }
+  }
+
+  tick() {
+    this.draw();
+  }
 }
