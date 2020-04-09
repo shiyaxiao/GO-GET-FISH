@@ -16,7 +16,6 @@ class Coin {
       this.draw();
     };
     this._image.src = './assets/img/coin_01.png';
-    console.log('hhhhh');
   }
 
   draw() {
@@ -25,7 +24,7 @@ class Coin {
     console.log('coin: draw');
   }
 
-  tick() {
-    this.draw();
-  }
+ tick() {
+   this.draw();
+    }
 }

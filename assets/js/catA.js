@@ -1,19 +1,21 @@
 class CatA {
   _image;
-  _x;
-  _y;
+  _x = 20;
+  _y = 0;
   _spriteWidth = 400;
   _spriteHeight = 400;
   _spriteFrames = 9;
   _currentFrames = 0;
-  _spriteX = this._spriteWidth;
-  _spriteY = 0;
 
-  constructor(x, y) {
-    console.log(x, y);
+  _moveX = 10;
 
-    this._x = x;
-    this._y = y;
+  constructor() {
+    this._y = canvas.height - this._spriteHeight;
+
+    this.animation = new AnimationFrame(10, () => this.update());
+    this.animation.start();
+
+    console.log('catA: constructor');
 
     this.loadImages();
   }
@@ -27,11 +29,12 @@ class CatA {
   }
 
   draw() {
-    if (this._currentFrames >= this._spriteFrames - 1) {
-      this._currentFrames = 0;
-    } else {
-      this._currentFrames++;
-    }
+    // if (this._currentFrames >= this._spriteFrames - 1) {
+    //   this._currentFrames = 0;
+    // } else {
+    //   this._currentFrames++;
+    // }
+
     const spriteX = this._spriteWidth * this._currentFrames;
 
     ctx.beginPath();
@@ -46,13 +49,53 @@ class CatA {
       this._spriteWidth,
       this._spriteHeight
     );
+  }
 
-    console.log('cat: draw');
+  update() {
+    console.log('catA:update');
+    this._currentFrames++;
+    if (this._currentFrames % this._spriteFrames == 0) {
+      this._currentFrames = 0;
+    }
+    // if (this._currentFrames >= this._spriteFrames - 1) {
+    //   this._currentFrames = 0;
+    // } else {
+    //   this._currentFrames++;
+    // }
   }
 
   tick() {
-    console.log('catAtick');
-
+    // console.log('catA: tick');
     this.draw();
+    // this.update();
+  }
+
+  start() {
+    if (this.animation.isRunning === false) {
+      //   setTimeout(() => {
+      this.animation.start();
+      //  }, 500);
+    }
+  }
+
+  stop() {
+    if (this.animation.isRunning === true) {
+      //   setTimeout(() => {
+      this.animation.stop();
+      //   }, 500);
+    }
+  }
+
+  //move catA
+  jumpUp() {
+    console.log('catA: jumpUp');
+    this._x += this._moveX;
+    this.start();
+  }
+
+  jumpDown() {
+    console.log('catA: jumpDown');
+    this._x -= this._moveX;
+    this.start();
   }
 }
