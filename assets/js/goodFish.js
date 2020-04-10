@@ -1,14 +1,14 @@
-class Coin {
+class GoodFish {
   _image;
-  _x = 500;
-  _y = 400;
-  _spriteWidth = 100;
+  _x = 200;
+  _y = 100;
+  _spriteWidth = 150;
   _spriteHeight = 100;
-  _spriteFrames = 20;
+  _spriteFrames = 4;
   _currentFrames = 0;
 
-  constructor(x, y) {
-    this.animation = new AnimationFrame(18, () => this.update());
+  constructor() {
+    this.animation = new AnimationFrame(5, () => this.update());
     this.animation.start();
     this.loadImages();
   }
@@ -18,7 +18,7 @@ class Coin {
     this._image.onload = () => {
       this.draw();
     };
-    this._image.src = './assets/img/coin.png';
+    this._image.src = './assets/img/good-fish.png';
   }
 
   draw() {
@@ -36,7 +36,7 @@ class Coin {
       this._spriteWidth,
       this._spriteHeight
     );
-    console.log('💰: draw');
+    console.log('🐟: draw');
   }
 
   update() {
