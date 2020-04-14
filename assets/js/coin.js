@@ -8,7 +8,7 @@ class Coin {
   _currentFrames = 0;
 
   constructor(x, y) {
-    this.animation = new AnimationFrame(18, () => this.update());
+    this.animation = new AnimationFrame(10, () => this.update());
     this.animation.start();
     this.loadImages();
   }
