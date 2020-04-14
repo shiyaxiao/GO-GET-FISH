@@ -2,8 +2,8 @@ class Coin {
   _image;
   _x = 500;
   _y = 400;
-  _spriteWidth = 100;
-  _spriteHeight = 100;
+  _spriteWidth = 90;
+  _spriteHeight = 90;
   _spriteFrames = 20;
   _currentFrames = 0;
 
@@ -36,7 +36,7 @@ class Coin {
       this._spriteWidth,
       this._spriteHeight
     );
-    console.log('💰: draw');
+    //console.log('💰: draw');
   }
 
   update() {

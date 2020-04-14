@@ -2,8 +2,8 @@ class BadFish {
   _image;
   _x = 400;
   _y = 100;
-  _spriteWidth = 150;
-  _spriteHeight = 100;
+  _spriteWidth = 135;
+  _spriteHeight = 90;
   _spriteFrames = 4;
   _currentFrames = 0;
 
@@ -36,7 +36,7 @@ class BadFish {
       this._spriteWidth,
       this._spriteHeight
     );
-    console.log('bad-fish: draw');
+    // console.log('bad-fish: draw');
   }
 
   update() {

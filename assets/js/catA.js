@@ -1,53 +1,3 @@
-class Sprite {
-  image;
-  width;
-  height;
-  frames;
-  currentFrame = 0;
-  animation;
-  locatoin;
-
-  constructor(options) {
-    // location, width, height, frames, draw = () => {}, update = () => {}
-    this.location = options.location;
-    this.width = options.width;
-    this.height = options.height;
-    this.frames = options.frames;
-    this.update = options.update;
-    this.draw = options.draw;
-
-    this.animation = new AnimationFrame(this.frames, () => this.update());
-    this._loadImage();
-  }
-
-  _loadImage() {
-    this.image = new Image();
-    this.image.onload = () => {
-      console.log('Sprite:onload');
-
-      this.draw();
-      this.animation.start();
-    };
-    this.image.src = this.location;
-  }
-
-  draw() {
-    const spriteX = this.width * this.currentFrames;
-    ctx.beginPath();
-    ctx.drawImage(
-      this.image,
-      spriteX,
-      0,
-      this.width,
-      this.height,
-      this.x,
-      this.y,
-      this.width,
-      this.height
-    );
-  }
-}
-
 class CatA {
   _x = 20;
   _y = 0;
@@ -57,14 +7,27 @@ class CatA {
   constructor() {
     this._walk = new Sprite({
       location: './assets/img/catA.png',
-      width: 400,
-      height: 400,
+      width: 200,
+      height: 200,
       frames: 9,
       update: () => this.update(),
       draw: () => this.draw(),
+      speed: 10,
+    });
+
+    this._jump = new Sprite({
+      location: './assets/img/catAjump.png',
+      width: 200,
+      height: 320,
+      frames: 7,
+      update: () => this.update(),
+      draw: () => this.draw(),
+      speed: 1,
     });
 
     this._y = canvas.height - this._walk.height;
+
+    this._currentImage = this._walk;
 
     //this.jump_animation = new AnimationFrame(15, () => this.update());
     //this.loadImages();
@@ -86,29 +49,33 @@ class CatA {
     //   this._currentFrames++;
     // }
 
-    const spriteX = this._walk.width * this._walk.currentFrame;
+    const spriteX = this._currentImage.width * this._currentImage.currentFrame;
 
     ctx.beginPath();
     ctx.drawImage(
-      this._walk.image,
+      this._currentImage.image,
       spriteX,
       0,
-      this._walk.width,
-      this._walk.height,
+      this._currentImage.width,
+      this._currentImage.height,
       this._x,
       this._y,
-      this._walk.width,
-      this._walk.height
+      this._currentImage.width,
+      this._currentImage.height
     );
-    console.log('🐱: draw');
+    // console.log('🐱: draw');
   }
 
   update() {
-    console.log('catA:update');
-    this._walk.currentFrame++;
-    if (this._walk.currentFrame % this._walk.frames == 0) {
-      this._walk.currentFrame = 0;
+    // console.log('catA:update');
+    // if ((this._currentImage = this._walk)) {
+    this._currentImage.currentFrame++;
+    if (this._currentImage.currentFrame % this._currentImage.frames == 0) {
+      this._currentImage.currentFrame = 0;
     }
+    //    }else {
+    //        this._currentImage.currentFrame++;
+
     // if (this._currentFrames >= this._spriteFrames - 1) {
     //   this._currentFrames = 0;
     // } else {
@@ -139,13 +106,25 @@ class CatA {
   }
 
   //move catA
-  jumpUp() {
-    console.log('catA: jumpUp');
+  walkRight() {
+    //console.log('catA: walkright');
     this._x += this._moveX;
+    this._currentImage = this._walk;
+  }
+
+  walkLeft() {
+    // console.log('catA: walkleft');
+    this._x -= this._moveX;
+    this._currentImage = this._walk;
+  }
+
+  jumpUp() {
+    this._currentImage = this._jump;
+    this._y -= 100;
   }
 
   jumpDown() {
-    console.log('catA: jumpDown');
-    this._x -= this._moveX;
+    this._currentImage = this._jump;
+    this._y += 100;
   }
 }

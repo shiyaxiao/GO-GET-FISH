@@ -36,7 +36,7 @@ class Bomb {
       this._spriteWidth,
       this._spriteHeight
     );
-    console.log('💣: draw');
+    //console.log('💣: draw');
   }
 
   update() {

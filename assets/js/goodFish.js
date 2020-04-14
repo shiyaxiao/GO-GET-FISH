@@ -2,8 +2,8 @@ class GoodFish {
   _image;
   _x = 200;
   _y = 100;
-  _spriteWidth = 150;
-  _spriteHeight = 100;
+  _spriteWidth = 135;
+  _spriteHeight = 90;
   _spriteFrames = 4;
   _currentFrames = 0;
 
@@ -36,7 +36,7 @@ class GoodFish {
       this._spriteWidth,
       this._spriteHeight
     );
-    console.log('🐟: draw');
+    //console.log('🐟: draw');
   }
 
   update() {
