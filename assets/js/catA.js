@@ -25,7 +25,7 @@ class CatA {
       speed: 1,
     });
 
-    this._y = canvas.height - this._walk.height;
+    this._y = canvas.height - this._walk.height - 50;
 
     this._currentImage = this._walk;
 
@@ -120,11 +120,11 @@ class CatA {
 
   jumpUp() {
     this._currentImage = this._jump;
-    this._y -= 100;
+    this._y -= 165;
   }
 
   jumpDown() {
     this._currentImage = this._jump;
-    this._y += 100;
+    this._y += 165;
   }
 }

@@ -16,12 +16,15 @@ const coin = new Coin();
 const goodFish = new GoodFish();
 const badFish = new BadFish();
 const bomb = new Bomb();
+const levels=new Levels();
 const background = new Background();
+
 
 const tick = () => {
   //console.log('Tick');
   ctx.clearRect(0, 0, canvas.clientWidth, canvas.height);
   background.tick();
+  levels.tick();
   catA.tick();
   coin.tick();
   goodFish.tick();
