@@ -16,7 +16,7 @@ class Sprite {
     this.frames = options.frames;
     this.update = options.update;
     this.draw = options.draw;
-    this.speed=options.speed;
+    this.speed = options.speed;
 
     this.animation = new AnimationFrame(this.speed, () => this.update());
     this._loadImage();

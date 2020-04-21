@@ -7,13 +7,13 @@ class Background {
 
   constructor() {
     this.loadImages();
-    console.log("background:constructor");
+
   }
 
   loadImages() {
     this._image = new Image();
     this._image.onload = () => {
-      console.log('background:loadimageeeee');
+     
 
       this.draw();
     };

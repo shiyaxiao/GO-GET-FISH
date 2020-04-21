@@ -7,8 +7,8 @@ class CatA {
   constructor() {
     this._walk = new Sprite({
       location: './assets/img/catA.png',
-      width: 200,
-      height: 200,
+      width: 165,
+      height: 245,
       frames: 9,
       update: () => this.update(),
       draw: () => this.draw(),
@@ -17,17 +17,17 @@ class CatA {
 
     this._jump = new Sprite({
       location: './assets/img/catAjump.png',
-      width: 200,
-      height: 320,
+      width: 165,
+      height: 245,
       frames: 7,
       update: () => this.update(),
       draw: () => this.draw(),
       speed: 1,
     });
 
-    this._y = canvas.height - this._walk.height - 50;
-
     this._currentImage = this._walk;
+
+    this._y = canvas.height - this._jump.height - 30;
 
     //this.jump_animation = new AnimationFrame(15, () => this.update());
     //this.loadImages();
@@ -120,11 +120,11 @@ class CatA {
 
   jumpUp() {
     this._currentImage = this._jump;
-    this._y -= 165;
+    this._y -= 171;
   }
 
   jumpDown() {
+    this._y += 171;
     this._currentImage = this._jump;
-    this._y += 165;
   }
 }
