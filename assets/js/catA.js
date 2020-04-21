@@ -108,7 +108,7 @@ class CatA {
   //move catA
   walkRight() {
     //console.log('catA: walkright');
-    this._x += this._moveX;
+    //this._x += this._moveX;
     this._currentImage = this._walk;
   }
 
@@ -120,11 +120,22 @@ class CatA {
 
   jumpUp() {
     this._currentImage = this._jump;
-    this._y -= 171;
+
+    this._y -= 171 / 2;
+
+    setTimeout(() => {
+      this._y -= 171 / 2;
+      this._currentImage = this._walk;
+    }, 250);
   }
 
   jumpDown() {
-    this._y += 171;
     this._currentImage = this._jump;
+    this._y += 171 / 2;
+
+    setTimeout(() => {
+      this._y += 171 / 2;
+      this._currentImage = this._walk;
+    }, 250);
   }
 }
