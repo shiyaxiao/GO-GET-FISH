@@ -4,7 +4,7 @@ class Levels {
   _width = 4141;
   _height = 600;
   _image;
-  _speedX = 8;
+  _speedX = 5;
 
   constructor() {
     this.loadImages();
@@ -23,7 +23,7 @@ class Levels {
   }
 
   move() {
-    if (this._x <= -4141) {
+    if (this._x <= -this._width + canvas.width) {
       this._x = 0;
     }
     this._x += -this._speedX;
