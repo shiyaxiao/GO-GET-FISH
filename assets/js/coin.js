@@ -1,9 +1,9 @@
 class Coin {
   _image;
   _x = 500;
-  _y = 400;
-  _spriteWidth = 90;
-  _spriteHeight = 90;
+  _y = 460;
+  _spriteWidth = 80;
+  _spriteHeight = 80;
   _spriteFrames = 20;
   _currentFrames = 0;
 

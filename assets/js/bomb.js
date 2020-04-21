@@ -1,7 +1,7 @@
 class Bomb {
   _image;
   _x = 600;
-  _y = 100;
+  _y = 120;
   _spriteWidth = 100;
   _spriteHeight = 100;
   _spriteFrames = 4;
