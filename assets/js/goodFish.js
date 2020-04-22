@@ -1,7 +1,7 @@
 class GoodFish {
   _image;
   _x = 200;
-  _y = 140;
+  _y = 470;
   _spriteWidth = 120;
   _spriteHeight = 80;
   _spriteFrames = 4;

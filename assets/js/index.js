@@ -11,15 +11,17 @@ const ctx = canvas.getContext('2d');
 // ctx.fillStyle = '#29b9e7';
 // ctx.fill();
 
-const catA = new CatA();
-const coin = new Coin();
-const goodFish = new GoodFish();
-const badFish = new BadFish();
-const bomb = new Bomb();
 const levels = new Levels();
 const background = new Background();
+const catA = new CatA();
 
-//Tick
+//const elements= new Elements();
+
+// const goodFish = new GoodFish();
+// const badFish = new BadFish();
+// const bomb = new Bomb();
+
+// Tick
 const tick = () => {
   //console.log('Tick');
   ctx.clearRect(0, 0, canvas.clientWidth, canvas.height);
@@ -27,10 +29,12 @@ const tick = () => {
   levels.tick();
   catA.tick();
 
-  coin.tick();
-  goodFish.tick();
-  badFish.tick();
-  bomb.tick();
+  //elements.tick();
+
+  // coin.tick();
+  // goodFish.tick();
+  // badFish.tick();
+  // bomb.tick();
 
   window.requestAnimationFrame(tick);
 };
