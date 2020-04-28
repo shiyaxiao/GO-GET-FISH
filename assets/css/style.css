@@ -1,9 +1,14 @@
 #drawing {
   border: 1px solid #cccccc;
   background-color: #9a9a9a;
-
 }
 
 .hidden {
   display: none;
+}
+
+#score {
+  text-align: left;
+  font-size: 20px;
+  
 }

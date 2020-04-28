@@ -1,14 +1,21 @@
 class CatA {
-  _x = 20;
-  _y = 0;
+  // Public
+  x = 20;
+  y = 0;
+  width = 165;
+  height = 208;
 
+  // Private
   _moveX = 10;
+  _scale = 1;
 
   constructor() {
+    this.width *= this._scale;
+    this.height *= this._scale;
     this._walk = new Sprite({
       location: './assets/img/catA.png',
-      width: 165,
-      height: 245,
+      width: this.width,
+      height: this.height,
       frames: 9,
       update: () => this.update(),
       draw: () => this.draw(),
@@ -17,8 +24,8 @@ class CatA {
 
     this._jump = new Sprite({
       location: './assets/img/catAjump.png',
-      width: 165,
-      height: 245,
+      width: this.width,
+      height: this.height,
       frames: 7,
       update: () => this.update(),
       draw: () => this.draw(),
@@ -27,7 +34,7 @@ class CatA {
 
     this._currentImage = this._walk;
 
-    this._y = canvas.height - this._jump.height - 30;
+    this.y = canvas.height - this._jump.height - 30;
 
     //this.jump_animation = new AnimationFrame(15, () => this.update());
     //this.loadImages();
@@ -58,8 +65,8 @@ class CatA {
       0,
       this._currentImage.width,
       this._currentImage.height,
-      this._x,
-      this._y,
+      this.x,
+      this.y,
       this._currentImage.width,
       this._currentImage.height
     );
@@ -86,7 +93,19 @@ class CatA {
   tick() {
     // console.log('catA: tick');
     this.draw();
+
+    this._touchingSomething();
     // this.update();
+  }
+
+  _touchingSomething() {
+    // console.log(`🐱: isTouchingSomething`);
+    // console.log(`${this.x}, ${this.y}`);
+    levels.touchingCoins(this);
+    levels.touchingGoodFish(this);
+    levels.touchingBadFish(this);
+    levels.touchingBomb(this)
+
   }
 
   start() {
@@ -114,27 +133,27 @@ class CatA {
 
   walkLeft() {
     // console.log('catA: walkleft');
-    this._x -= this._moveX;
+    this.x -= this._moveX;
     this._currentImage = this._walk;
   }
 
   jumpUp() {
     this._currentImage = this._jump;
 
-    this._y -= 171 / 2;
+    this.y -= 171 / 2;
 
     setTimeout(() => {
-      this._y -= 171 / 2;
+      this.y -= 171 / 2;
       this._currentImage = this._walk;
     }, 250);
   }
 
   jumpDown() {
     this._currentImage = this._jump;
-    this._y += 171 / 2;
+    this.y += 171 / 2;
 
     setTimeout(() => {
-      this._y += 171 / 2;
+      this.y += 171 / 2;
       this._currentImage = this._walk;
     }, 250);
   }

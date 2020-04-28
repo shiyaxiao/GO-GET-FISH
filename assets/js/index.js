@@ -14,6 +14,7 @@ const ctx = canvas.getContext('2d');
 const levels = new Levels();
 const background = new Background();
 const catA = new CatA();
+let score = 0;
 
 //const elements= new Elements();
 
@@ -79,23 +80,13 @@ var fsm = new StateMachine({
   ],
   methods: {
     onJumpUp: function () {
-      console.log('onJumpUp');
+      //  console.log('onJumpUp');
       catA.jumpUp();
     },
     onJumpDown: function () {
-      console.log('onJumpDown');
+      // console.log('onJumpDown');
       catA.jumpDown();
     },
-    // onJump2to3: function () {
-    //   console.log('2 to 3');
-    // },
-    // onJump3to2: function () {
-    //   console.log('3 to 2');
-    // },
-    // onJump2to1: function () {
-    //   console.log('2 to 1');
-    //   catA.jumpDown();
-    // },
   },
 });
 

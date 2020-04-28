@@ -1,19 +1,27 @@
 class GoodFish {
+  //public
+  x;
+  y;
+  width = 120;
+  height = 80;
+  isCollected = false;
+
+  //_y = 470;
+  //private
   _image;
-  _x = 200;
-  _y = 470;
-  _spriteWidth = 120;
-  _spriteHeight = 80;
   _spriteFrames = 4;
   _currentFrames = 0;
 
-  constructor() {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+
     this.animation = new AnimationFrame(5, () => this.update());
     this.animation.start();
-    this.loadImages();
+    this._loadImages();
   }
 
-  loadImages() {
+  _loadImages() {
     this._image = new Image();
     this._image.onload = () => {
       this.draw();
@@ -22,19 +30,23 @@ class GoodFish {
   }
 
   draw() {
-    const spriteX = this._spriteWidth * this._currentFrames;
+    if (this.isCollected) {
+      return;
+    }
+
+    const spriteX = this.width * this._currentFrames;
 
     ctx.beginPath();
     ctx.drawImage(
       this._image,
       spriteX,
       0,
-      this._spriteWidth,
-      this._spriteHeight,
-      this._x,
-      this._y,
-      this._spriteWidth,
-      this._spriteHeight
+      this.width,
+      this.height,
+      this.x,
+      this.y,
+      this.width,
+      this.height
     );
     //console.log('🐟: draw');
   }
@@ -46,7 +58,22 @@ class GoodFish {
     }
   }
 
-  tick() {
+  move(width, speed) {
+    if (this.isCollected) {
+      return;
+    }
+
+    if (this.x <= -width + canvas.width) {
+      this.x = 0;
+    }
+    this.x += -speed;
+  }
+
+    tick(width, speed) {
+    if (this.isCollected) {
+      return;
+    }
     this.draw();
+    this.move(width, speed);
   }
 }

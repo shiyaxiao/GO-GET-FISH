@@ -2,12 +2,12 @@ class Coin {
   // Public
   x;
   y;
+  width = 80;
+  height = 80;
   isCollected = false;
 
   // Private
   _image;
-  _spriteWidth = 80;
-  _spriteHeight = 80;
   _spriteFrames = 20;
   _currentFrames = 0;
 
@@ -41,19 +41,19 @@ class Coin {
       return;
     }
 
-    const spriteX = this._spriteWidth * this._currentFrames;
+    const spriteX = this.width * this._currentFrames;
 
     ctx.beginPath();
     ctx.drawImage(
       this._image,
       spriteX,
       0,
-      this._spriteWidth,
-      this._spriteHeight,
+      this.width,
+      this.height,
       this.x,
       this.y,
-      this._spriteWidth,
-      this._spriteHeight
+      this.width,
+      this.height
     );
     //console.log('💰: draw');
   }
@@ -70,7 +70,7 @@ class Coin {
       return;
     }
 
-    console.log(`Coin: move`);
+    // console.log(`Coin: move`);
 
     if (this.x <= -width + canvas.width) {
       this.x = 0;
