@@ -19,10 +19,10 @@ class Levels {
   constructor() {
     this._loadImages();
 
-    this._coins = this._createCoins(10);
-    this._goodFishes = this._createGoodFishes(4);
-    this._badFishes = this._createBadFishes(10);
-    this._bombs = this._createBombs(5);
+    this._coins = this._createMultipleItems(Coin, 10);
+    this._goodFishes = this._createMultipleItems(GoodFish, 4);
+    this._badFishes = this._createMultipleItems(BadFish, 10);
+    this._bombs = this._createMultipleItems(Bomb, 5);
   }
 
   _loadImages() {
@@ -45,48 +45,12 @@ class Levels {
     return new item(x, y);
   }
 
-  _createCoins(numberOfCoins) {
-    const coins = [];
-
-    for (let index = 0; index < numberOfCoins; index++) {
-      coins.push(this._createItem(Coin));
+  _createMultipleItems(item, number = 0) {
+    const items = [];
+    for (let index = 0; index < number; index++) {
+      items.push(this._createItem(item));
     }
-
-    //coins.push(new Coin(400, 460));
-    //coins.push(new Coin(600, 140));
-    //coins.push(new Coin(800, 460));
-
-    return coins;
-  }
-
-  _createGoodFishes(numberOfGoodFishes) {
-    const goodFishes = [];
-
-    for (let index = 0; index < numberOfGoodFishes; index++) {
-      goodFishes.push(this._createItem(GoodFish));
-    }
-
-    return goodFishes;
-  }
-
-  _createBadFishes(numberOfBadFishes) {
-    const badFishes = [];
-
-    for (let index = 0; index < numberOfBadFishes; index++) {
-      badFishes.push(this._createItem(BadFish));
-    }
-
-    return badFishes;
-  }
-
-  _createBombs(numberOfBombs) {
-    const bombs = [];
-
-    for (let index = 0; index < numberOfBombs; index++) {
-      bombs.push(this._createItem(Bomb));
-    }
-
-    return bombs;
+    return items;
   }
 
   draw() {
@@ -238,9 +202,6 @@ class Levels {
       array.splice(index, 1);
 
       // game end
-
-
-      
     });
   }
 
