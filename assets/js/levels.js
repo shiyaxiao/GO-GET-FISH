@@ -7,18 +7,20 @@ class Levels {
   _y = 0;
   _height = 600;
   _image;
-  _speedX = 10;
+  _speedX = 7;
 
   _coins = [];
   _goodFishes = [];
   _badFishes = [];
   _bombs = [];
 
+  _levelsY = [460, 270, 100];
+
   constructor() {
     this._loadImages();
 
     this._coins = this._createCoins(10);
-    this._goodFishes = this._createGoodFishes(3);
+    this._goodFishes = this._createGoodFishes(4);
     this._badFishes = this._createBadFishes(10);
     this._bombs = this._createBombs(5);
   }
@@ -31,15 +33,23 @@ class Levels {
     this._image.src = './assets/img/levels.png';
   }
 
+  _createItem(item, x, y) {
+    if (x == undefined || x == null) {
+      x = getRandom(100, this.width);
+    }
+
+    if (y == undefined || y == null) {
+      y = this._levelsY[getRandom(0, 2)];
+    }
+
+    return new item(x, y);
+  }
+
   _createCoins(numberOfCoins) {
     const coins = [];
 
-    const levelsY = [460, 270, 100];
-
     for (let index = 0; index < numberOfCoins; index++) {
-      let x = getRandom(100, this.width);
-      let y = levelsY[getRandom(0, 2)];
-      coins.push(new Coin(x, y));
+      coins.push(this._createItem(Coin));
     }
 
     //coins.push(new Coin(400, 460));
@@ -51,12 +61,9 @@ class Levels {
 
   _createGoodFishes(numberOfGoodFishes) {
     const goodFishes = [];
-    const levelsY = [460, 270, 100];
 
     for (let index = 0; index < numberOfGoodFishes; index++) {
-      let x = getRandom(100, this.width);
-      let y = levelsY[getRandom(0, 2)];
-      goodFishes.push(new GoodFish(x, y));
+      goodFishes.push(this._createItem(GoodFish));
     }
 
     return goodFishes;
@@ -64,27 +71,22 @@ class Levels {
 
   _createBadFishes(numberOfBadFishes) {
     const badFishes = [];
-    const levelsY = [460, 270, 100];
 
     for (let index = 0; index < numberOfBadFishes; index++) {
-      let x = getRandom(100, this.width);
-      let y = levelsY[getRandom(0, 2)];
-      badFishes.push(new BadFish(x, y));
-
-      return badFishes;
+      badFishes.push(this._createItem(BadFish));
     }
+
+    return badFishes;
   }
 
   _createBombs(numberOfBombs) {
     const bombs = [];
-    const levelsY = [460, 270, 100];
 
     for (let index = 0; index < numberOfBombs; index++) {
-      let x = getRandom(100, this.width);
-      let y = levelsY[getRandom(0, 2)];
-      bombs.push(new Bomb(x, y));
-      return bombs;
+      bombs.push(this._createItem(Bomb));
     }
+
+    return bombs;
   }
 
   draw() {
@@ -105,74 +107,145 @@ class Levels {
     this.move();
     this.draw();
 
-    this._coins.forEach((coin) => {
-      coin.tick(this.width, this._speedX);
+    console.log(
+      this._coins.length,
+      this._goodFishes.length
+      //this._badFishes.length
+    );
+
+    this._coins.forEach((item, index, array) => {
+      item.tick(this.width, this._speedX);
+
+      if (item.isOffScreen) {
+        // remove the coin
+        array.splice(index, 1);
+
+        // create a new one way off screen
+        let x = getRandom(canvas.width + item.width, this.width);
+        let newItem = this._createItem(Coin, x);
+
+        // add it to the array
+        array.push(newItem);
+      }
     });
-    this._goodFishes.forEach((goodFish) => {
-      goodFish.tick(this.width, this._speedX);
+
+    this._goodFishes.forEach((item, index, array) => {
+      item.tick(this.width, this._speedX);
+      if (item.isOffScreen) {
+        //remove the goodfish
+        array.splice(index, 1);
+
+        //create a new one way off screen
+        let x = getRandom(canvas.width + item.width, this.width);
+        let newItem = this._createItem(GoodFish, x);
+
+        // add it to the array
+        array.push(newItem);
+      }
     });
-    this._badFishes.forEach((badFish) => {
-      badFish.tick(this.width, this._speedX);
+
+    this._badFishes.forEach((item, index, array) => {
+      item.tick(this.width, this._speedX);
+
+      item.tick(this.width, this._speedX);
+      if (item.isOffScreen) {
+        //remove the badfish
+        array.splice(index, 1);
+
+        //create a new one way off screen
+        let x = getRandom(canvas.width + item.width, this.width);
+        let newItem = this._createItem(BadFish, x);
+
+        // add it to the array
+        array.push(newItem);
+      }
+    });
+
+    this._bombs.forEach((item, index, array) => {
+      item.tick(this.width, this._speedX);
+
+      item.tick(this.width, this._speedX);
+      if (item.isOffScreen) {
+        //remove the badfish
+        array.splice(index, 1);
+
+        //create a new one way off screen
+        let x = getRandom(canvas.width + item.width, this.width);
+        let newItem = this._createItem(Bomb, x);
+
+        // add it to the array
+        array.push(newItem);
+      }
     });
   }
 
   touchingCoins(player) {
-    this._coins.forEach((coin) => {
-      if (coin.isCollected) {
+    this._coins.forEach((item, index, array) => {
+      if (!isColliding(player, item)) {
         return;
       }
-      if (isColliding(player, coin)) {
-        console.log('hit coin');
-        coin.isCollected = true;
-        // increase the score
-        score += 1;
-        document.getElementById('score').innerHTML = score;
-      }
+
+      console.log('hit coin');
+
+      // Remove from array
+      array.splice(index, 1);
+
+      // increase the score
+      score += 1;
+      document.getElementById('score').innerHTML = score;
     });
   }
 
   touchingGoodFish(player) {
-    this._goodFishes.forEach((goodFish) => {
-      if (goodFish.isCollected) {
+    this._goodFishes.forEach((item, index, array) => {
+      if (!isColliding(player, item)) {
         return;
       }
-      if (isColliding(player, goodFish)) {
-        console.log('+++');
-        goodFish.isCollected = true;
-        // increase the score
-        score += 5;
-        document.getElementById('score').innerHTML = score;
-      }
+      console.log('+++');
+
+      // Remove from list
+      array.splice(index, 1);
+
+      // increase the score
+      score += 5;
+      document.getElementById('score').innerHTML = score;
     });
   }
 
   touchingBadFish(player) {
-    this._badFishes.forEach((badFish) => {
-      if (badFish.isCollected) {
+    this._badFishes.forEach((item, index, array) => {
+      if (!isColliding(player, item)) {
         return;
       }
-      if (isColliding(player, badFish)) {
-        console.log('---');
-        badFish.isCollected = true;
-        // decrease the score
-        score -= 5;
-        document.getElementById('score').innerHTML = score;
-      }
+
+      console.log('---');
+      // Remove from list
+      array.splice(index, 1);
+
+      // decrease the score
+      score -= 5;
+      document.getElementById('score').innerHTML = score;
     });
   }
 
   touchingBomb(player) {
-    this._bombs.forEach((bomb) => {
-      if (bomb.isCollected) {
+    this._bombs.forEach((item, index, array) => {
+      if (!isColliding(player, item)) {
         return;
       }
-      if (isColliding(player, bomb)) {
-        console.log('---');
-        bomb.isCollected = true;
-        // game end
-        // score -= 5;
-        // document.getElementById('score').innerHTML = score;
-      }
+      console.log('---');
+      // Remove from list
+      array.splice(index, 1);
+
+      // game end
+
+
+      
     });
   }
+
+  // endGame() {
+  //   if ((score = 0)) {
+  //   }
+  // }
 }

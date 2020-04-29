@@ -4,7 +4,7 @@ class Bomb {
   y;
   width = 100;
   height = 100;
-  isCollected = false;
+  isOffScreen = false;
 
   //private
   _image;
@@ -30,7 +30,7 @@ class Bomb {
   }
 
   draw() {
-    if (this.isCollected) {
+    if (this.isOffScreen) {
       return;
     }
     const spriteX = this.width * this._currentFrames;
@@ -58,18 +58,16 @@ class Bomb {
   }
 
   move(width, speed) {
-    if (this.isCollected) {
+    if (this.x + this.width < 0) {
+      this.isOffScreen = true;
       return;
     }
 
-    if (this.x <= -width + canvas.width) {
-      this.x = 0;
-    }
     this.x += -speed;
   }
 
   tick(width, speed) {
-    if (this.isCollected) {
+    if (this.isOffScreen) {
       return;
     }
     this.draw();

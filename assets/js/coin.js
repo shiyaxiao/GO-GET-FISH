@@ -4,7 +4,7 @@ class Coin {
   y;
   width = 80;
   height = 80;
-  isCollected = false;
+  isOffScreen = false;
 
   // Private
   _image;
@@ -37,7 +37,7 @@ class Coin {
   }
 
   draw() {
-    if (this.isCollected) {
+    if (this.isOffScreen) {
       return;
     }
 
@@ -66,20 +66,16 @@ class Coin {
   }
 
   move(width, speed) {
-    if (this.isCollected) {
+    if (this.x + this.width < 0) {
+      this.isOffScreen = true;
       return;
     }
 
-    // console.log(`Coin: move`);
-
-    if (this.x <= -width + canvas.width) {
-      this.x = 0;
-    }
     this.x += -speed;
   }
 
   tick(width, speed) {
-    if (this.isCollected) {
+    if (this.isOffScreen) {
       return;
     }
     this.draw();

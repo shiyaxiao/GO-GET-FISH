@@ -4,6 +4,7 @@ class BadFish {
   y;
   width = 120;
   height = 80;
+  isOffScreen = false;
 
   //private
   _image;
@@ -27,7 +28,7 @@ class BadFish {
   }
 
   draw() {
-    if (this.isCollected) {
+    if (this.isOffScreen) {
       return;
     }
     const spriteX = this.width * this._currentFrames;
@@ -55,18 +56,15 @@ class BadFish {
   }
 
   move(width, speed) {
-    if (this.isCollected) {
+    if (this.x + this.width < 0) {
+      this.isOffScreen = true;
       return;
-    }
-
-    if (this.x <= -width + canvas.width) {
-      this.x = 0;
     }
     this.x += -speed;
   }
 
   tick(width, speed) {
-    if (this.isCollected) {
+    if (this.isOffScreen) {
       return;
     }
     this.draw();

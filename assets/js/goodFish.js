@@ -4,7 +4,7 @@ class GoodFish {
   y;
   width = 120;
   height = 80;
-  isCollected = false;
+  isOffScreen = false;
 
   //_y = 470;
   //private
@@ -30,7 +30,7 @@ class GoodFish {
   }
 
   draw() {
-    if (this.isCollected) {
+    if (this.isOffScreen) {
       return;
     }
 
@@ -59,18 +59,16 @@ class GoodFish {
   }
 
   move(width, speed) {
-    if (this.isCollected) {
+    if (this.x + this.width < 0) {
+      this.isOffScreen = true;
       return;
     }
 
-    if (this.x <= -width + canvas.width) {
-      this.x = 0;
-    }
     this.x += -speed;
   }
 
-    tick(width, speed) {
-    if (this.isCollected) {
+  tick(width, speed) {
+    if (this.isOffScreen) {
       return;
     }
     this.draw();
