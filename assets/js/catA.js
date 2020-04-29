@@ -104,8 +104,7 @@ class CatA {
     levels.touchingCoins(this);
     levels.touchingGoodFish(this);
     levels.touchingBadFish(this);
-    levels.touchingBomb(this)
-
+    levels.touchingBomb(this);
   }
 
   start() {

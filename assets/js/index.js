@@ -16,17 +16,35 @@ const background = new Background();
 const catA = new CatA();
 let score = 0;
 
+let gameEnded = false;
+
 //const elements= new Elements();
 
 // const goodFish = new GoodFish();
 // const badFish = new BadFish();
 // const bomb = new Bomb();
 
+function displayMessage(text = '', fontSize = 110, color = 'black') {
+  // display some message
+  ctx.fillStyle = color;
+  ctx.font = `${fontSize}px serif`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+}
+
 // Tick
 const tick = () => {
   //console.log('Tick');
   ctx.clearRect(0, 0, canvas.clientWidth, canvas.height);
+
   background.tick();
+
+  if (gameEnded) {
+    displayMessage(`you suck ${score}`);
+    return;
+  }
+
   levels.tick();
   catA.tick();
 
