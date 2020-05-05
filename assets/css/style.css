@@ -18,3 +18,45 @@
   width: 28px;
   background-image: url(../img/startsquare.png);
 }
+
+.start-screen {
+  position: absolute;
+  top: 10px;
+  /* bottom: 5; */
+  left: 9px;
+  /* right: 5; */
+  /* display: grid; */
+}
+
+.start-screen-content {
+  position: absolute;
+  top: 200px;
+  left: 700px;
+  /* display: grid; */
+  /* height: 100%;
+  width: 100%; */
+}
+
+.game-title {
+  color: orange;
+  font-family: 'Roboto', sans-serif;
+  font-size: 40px;
+  font-weight: 900;
+  justify-self: center;
+  /* margin-top: 9%; */
+}
+
+.start-button {
+  height: 66px;
+  width: 244px;
+  background: orange;
+  border-radius: 33px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 24px;
+  font-weight: 900;
+  color: white;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  justify-self: center;
+}

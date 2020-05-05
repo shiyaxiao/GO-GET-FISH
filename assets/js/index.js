@@ -1,5 +1,22 @@
 const canvas = document.querySelector('#drawing');
 const ctx = canvas.getContext('2d');
+const startScreen = document.getElementById('start-screen');
+//const startText = document.getElementById('game-title');
+const startBtn = document.getElementById('start-button');
+
+startBtn.onclick = function () {
+  //startBtn.style.display = 'none';
+  startScreen.style.display = 'none';
+  //startText.style.display = 'none';
+  tick();
+};
+
+// startBtn.onclick = function () {
+//   if (this.innerHTML === 'start') {
+//     tick();
+//   } else {
+//    return;
+// };
 
 // //background
 // ctx.beginPath();
@@ -58,7 +75,7 @@ const tick = () => {
   window.requestAnimationFrame(tick);
 };
 
-tick();
+//tick();
 
 function onKeyDown(event) {
   const key = event.key.toLowerCase();

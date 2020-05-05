@@ -3,7 +3,7 @@ class Bomb {
   x;
   y;
   width = 100;
-  height = 100;
+  height = 75;
   isOffScreen = false;
 
   //private

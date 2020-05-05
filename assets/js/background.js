@@ -17,7 +17,7 @@ class Background {
     this._image.onload = () => {
       this.draw();
     };
-    this._image.src = './assets/img/background-2.png';
+    this._image.src = './assets/img/background.png';
   }
 
   draw() {

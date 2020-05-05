@@ -168,6 +168,10 @@ class Levels {
       score += updateScoreBy;
       document.getElementById('score').innerHTML = score;
 
+      if (score <= 0) {
+        this.endGame();
+      }
+
       // create a new item way off screen
       const x = getRandom(canvas.width + item.width, this.width);
       const newItem = this._createItem({ type: item.constructor, x: x });
