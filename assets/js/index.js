@@ -1,32 +1,23 @@
 const canvas = document.querySelector('#drawing');
 const ctx = canvas.getContext('2d');
 const startScreen = document.getElementById('start-screen');
-//const startText = document.getElementById('game-title');
 const startBtn = document.getElementById('start-button');
+const restartContent = document.getElementById('restart');
+const restartBtn = document.getElementById('restart-button');
 
+restartContent.style.display = 'none';
+restartBtn.style.display = 'none';
+
+let backgroundAudio = document.createElement('audio');
+backgroundAudio.src = 'assets/sound/background.mov';
+
+//start game
 startBtn.onclick = function () {
-  //startBtn.style.display = 'none';
+  backgroundAudio.play();
+
   startScreen.style.display = 'none';
-  //startText.style.display = 'none';
   tick();
 };
-
-// startBtn.onclick = function () {
-//   if (this.innerHTML === 'start') {
-//     tick();
-//   } else {
-//    return;
-// };
-
-// //background
-// ctx.beginPath();
-// ctx.rect(0, 0, 1200, 450);
-// ctx.fillStyle = '#ffe2f0';
-// ctx.fill();
-// ctx.beginPath();
-// ctx.rect(0, 450, 1200, 200);
-// ctx.fillStyle = '#29b9e7';
-// ctx.fill();
 
 const levels = new Levels();
 const background = new Background();
@@ -36,36 +27,38 @@ let score = 0;
 let gameEnded = false;
 
 //const elements= new Elements();
-
 // const goodFish = new GoodFish();
 // const badFish = new BadFish();
 // const bomb = new Bomb();
 
-function displayMessage(text = '', fontSize = 110, color = 'black') {
-  // display some message
+//display some message
+function displayMessage(text = '', fontSize = 110, color = 'orange') {
   ctx.fillStyle = color;
-  ctx.font = `${fontSize}px serif`;
+  ctx.font = `${fontSize}px Roboto`;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+  ctx.fillText(text, canvas.width / 2, canvas.height / 2.5);
 }
 
 // Tick
 const tick = () => {
-  //console.log('Tick');
   ctx.clearRect(0, 0, canvas.clientWidth, canvas.height);
 
   background.tick();
 
+  //game end
   if (gameEnded) {
-    displayMessage(`you suck ${score}`);
+    backgroundAudio.pause();
+
+    displayMessage(`Bye Bye~ ${score}`);
+    /// displayMessage(`Your ${score}`);
+    //restartContent.style.display = 'initial';
+    restartBtn.style.display = 'initial';
     return;
   }
 
   levels.tick();
   catA.tick();
-
-  //elements.tick();
 
   // coin.tick();
   // goodFish.tick();
@@ -104,6 +97,10 @@ function onKeyUp(event) {
   //setTimeout(catA.walkRight(), 3000);
 }
 
+restartBtn.onclick = function () {
+  window.location.href = 'index.html';
+};
+
 //StateMachine
 var fsm = new StateMachine({
   init: 'level1',
@@ -127,3 +124,4 @@ var fsm = new StateMachine({
 
 document.addEventListener('keydown', onKeyDown);
 document.addEventListener('keyup', onKeyUp);
+//document.addEventListener("clikck", restart);

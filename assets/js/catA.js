@@ -22,6 +22,9 @@ class CatA {
       speed: 10,
     });
 
+    this.jumpAudio = document.createElement('audio');
+    this.jumpAudio.src = 'assets/sound/jump.wav';
+
     this._jump = new Sprite({
       location: './assets/img/catAjump.png',
       width: this.width,
@@ -145,15 +148,20 @@ class CatA {
       this.y -= 171 / 2;
       this._currentImage = this._walk;
     }, 250);
+
+    this.jumpAudio.play();
   }
 
   jumpDown() {
     this._currentImage = this._jump;
+
     this.y += 171 / 2;
 
     setTimeout(() => {
       this.y += 171 / 2;
       this._currentImage = this._walk;
     }, 250);
+
+    this.jumpAudio.play();
   }
 }

@@ -2,7 +2,7 @@ class Bomb {
   //public
   x;
   y;
-  width = 100;
+  width = 80;
   height = 75;
   isOffScreen = false;
 

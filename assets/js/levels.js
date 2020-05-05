@@ -23,6 +23,18 @@ class Levels {
     this._goodFishes = this._createMultipleItems(GoodFish, 3);
     this._badFishes = this._createMultipleItems(BadFish, 2);
     this._bombs = this._createMultipleItems(Bomb, 1);
+
+    this.coinAudio = document.createElement('audio');
+    this.coinAudio.src = 'assets/sound/coin.mp3';
+
+    this.goodFishAudio = document.createElement('audio');
+    this.goodFishAudio.src = 'assets/sound/goodFish.wav';
+
+    this.badFishAudio = document.createElement('audio');
+    this.badFishAudio.src = 'assets/sound/badFish.wav';
+
+    this.bombAudio = document.createElement('audio');
+    this.bombAudio.src = 'assets/sound/bomb.mp3';
   }
 
   _loadImages() {
@@ -110,7 +122,8 @@ class Levels {
         return;
       }
 
-      console.warn('hit coin');
+      // console.warn('hit coin');
+      this.coinAudio.play();
 
       // increase the score
       score += updateScoreBy;
@@ -136,8 +149,9 @@ class Levels {
         return;
       }
 
-      console.warn('hit GoodFish');
-
+      // console.warn('hit GoodFish');
+      this.goodFishAudio.play();
+      
       // increase the score
       score += updateScoreBy;
       document.getElementById('score').innerHTML = score;
@@ -162,7 +176,8 @@ class Levels {
         return;
       }
 
-      console.warn('hit BadFish');
+      //console.warn('hit BadFish');
+      this.badFishAudio.play();
 
       // increase the score
       score += updateScoreBy;
@@ -189,7 +204,7 @@ class Levels {
       if (!isColliding(player, item)) {
         return;
       }
-
+      this.bombAudio.play();
       this.endGame();
     });
   }
