@@ -1,13 +1,13 @@
 class Levels {
   // public
   width = 1521;
+  speedX = 7;
 
   // private
   _x = 0;
   _y = 0;
   _height = 600;
   _image;
-  _speedX = 7;
 
   _coins = [];
   _goodFishes = [];
@@ -75,11 +75,11 @@ class Levels {
     if (this._x <= -this.width + canvas.width) {
       this._x = 0;
     }
-    this._x += -this._speedX;
+    this._x += -this.speedX;
   }
 
   _tickItem(item, index, array) {
-    item.tick(this.width, this._speedX);
+    item.tick(this.width, this.speedX);
 
     if (!item.isOffScreen) {
       return;
@@ -130,12 +130,12 @@ class Levels {
       score += updateScoreBy;
       document.getElementById('score').innerHTML = score;
 
+      //score check to speed up
       if (score > 25) {
-        this._speedX = 9;
+        this.speedX = 9;
       }
-
       if (score > 50) {
-        this._speedX = 11;
+        this.speedX = 11;
       }
 
       // create a new item way off screen
@@ -165,17 +165,20 @@ class Levels {
       score += updateScoreBy;
       document.getElementById('score').innerHTML = score;
 
+      //score check to speed up
       if (score > 25) {
-        this._speedX = 9;
+        this.speedX = 9;
       }
-
       if (score > 50) {
-        this._speedX = 11;
+        this.speedX = 11;
       }
 
       // create a new item way off screen
       const x = getRandom(canvas.width + item.width, this.width);
-      const newItem = this._createItem({ type: item.constructor, x: x });
+      const newItem = this._createItem({
+        type: item.constructor,
+        x: x,
+      });
 
       // Remove old item from array
       array.splice(index, 1);
