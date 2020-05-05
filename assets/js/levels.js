@@ -130,6 +130,14 @@ class Levels {
       score += updateScoreBy;
       document.getElementById('score').innerHTML = score;
 
+      if (score > 25) {
+        this._speedX = 9;
+      }
+
+      if (score > 50) {
+        this._speedX = 11;
+      }
+
       // create a new item way off screen
       const x = getRandom(canvas.width + item.width, this.width);
       const newItem = this._createItem({ type: item.constructor, x: x });
@@ -156,6 +164,14 @@ class Levels {
       // increase the score
       score += updateScoreBy;
       document.getElementById('score').innerHTML = score;
+
+      if (score > 25) {
+        this._speedX = 9;
+      }
+
+      if (score > 50) {
+        this._speedX = 11;
+      }
 
       // create a new item way off screen
       const x = getRandom(canvas.width + item.width, this.width);
