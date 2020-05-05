@@ -24,6 +24,7 @@ class Levels {
     this._badFishes = this._createMultipleItems(BadFish, 3);
     this._bombs = this._createMultipleItems(Bomb, 1);
 
+    //Audio
     this.coinAudio = document.createElement('audio');
     this.coinAudio.src = 'assets/sound/coin.mov';
 
@@ -47,7 +48,7 @@ class Levels {
 
   // options = { type, x, y, array }
   _createItem(options) {
-    options.x = options.x ?? getRandom(350, this.width);
+    options.x = options.x ?? getRandom(400, this.width);
     options.y = options.y ?? this._levelsY[getRandom(0, 2)];
     const newItem = new options.type(options.x, options.y);
     return newItem;
@@ -102,11 +103,11 @@ class Levels {
     this.move();
     this.draw();
 
-    console.log(
-      this._coins.length,
-      this._goodFishes.length
-      //this._badFishes.length
-    );
+    // console.log(
+    //   this._coins.length,
+    //   this._goodFishes.length
+    //   this._badFishes.length
+    // );
 
     this._coins.forEach(this._tickItem.bind(this));
     this._goodFishes.forEach(this._tickItem.bind(this));

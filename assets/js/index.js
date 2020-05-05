@@ -41,6 +41,7 @@ function displayMessage(text = '', fontSize, x, y, color = '') {
 }
 // fontSize = 110, color = 'orange'
 // ${fontSize}
+
 // Tick
 const tick = () => {
   ctx.clearRect(0, 0, canvas.clientWidth, canvas.height);
@@ -50,6 +51,7 @@ const tick = () => {
   if (gameEnded) {
     backgroundAudio.pause();
 
+    //display Message
     displayMessage(
       `Bye Bye~`,
       110,

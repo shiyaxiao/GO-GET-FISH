@@ -15,7 +15,6 @@ class Coin {
     if (x === undefined) {
       throw Error(`Coin: 'x' not defined.`);
     }
-
     if (y === undefined) {
       throw Error(`Coin: 'y' not defined.`);
     }
