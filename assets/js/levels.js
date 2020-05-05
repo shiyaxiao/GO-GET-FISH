@@ -21,7 +21,7 @@ class Levels {
 
     this._coins = this._createMultipleItems(Coin, 5);
     this._goodFishes = this._createMultipleItems(GoodFish, 2);
-    this._badFishes = this._createMultipleItems(BadFish, 3);
+    this._badFishes = this._createMultipleItems(BadFish, 2);
     this._bombs = this._createMultipleItems(Bomb, 1);
 
     //Audio
@@ -48,7 +48,7 @@ class Levels {
 
   // options = { type, x, y, array }
   _createItem(options) {
-    options.x = options.x ?? getRandom(400, this.width);
+    options.x = options.x ?? getRandom(500, this.width);
     options.y = options.y ?? this._levelsY[getRandom(0, 2)];
     const newItem = new options.type(options.x, options.y);
     return newItem;
