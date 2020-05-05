@@ -132,10 +132,10 @@ class Levels {
 
       //score check to speed up
       if (score > 25) {
-        this.speedX = 9;
+        this.speedX = 10;
       }
       if (score > 50) {
-        this.speedX = 11;
+        this.speedX = 12;
       }
 
       // create a new item way off screen
@@ -167,10 +167,10 @@ class Levels {
 
       //score check to speed up
       if (score > 25) {
-        this.speedX = 9;
+        this.speedX = 10;
       }
       if (score > 50) {
-        this.speedX = 11;
+        this.speedX = 12;
       }
 
       // create a new item way off screen
@@ -228,6 +228,14 @@ class Levels {
       this.endGame();
     });
   }
+
+// speedUp(){
+//   if (score/5) {
+
+//   }
+//   speedX+=
+// }
+
 
   endGame() {
     gameEnded = true;
