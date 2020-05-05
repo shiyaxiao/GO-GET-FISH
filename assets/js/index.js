@@ -32,25 +32,38 @@ let gameEnded = false;
 // const bomb = new Bomb();
 
 //display some message
-function displayMessage(text = '', fontSize = 110, color = 'orange') {
+function displayMessage(text = '', fontSize, x, y, color = '') {
   ctx.fillStyle = color;
   ctx.font = `${fontSize}px Roboto`;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText(text, canvas.width / 2, canvas.height / 2.5);
+  ctx.fillText(text, x, y);
 }
-
+// fontSize = 110, color = 'orange'
+// ${fontSize}
 // Tick
 const tick = () => {
   ctx.clearRect(0, 0, canvas.clientWidth, canvas.height);
-
   background.tick();
 
-  //game end
+  //end game
   if (gameEnded) {
     backgroundAudio.pause();
 
-    displayMessage(`Bye Bye~ ${score}`);
+    displayMessage(
+      `Bye Bye~`,
+      110,
+      canvas.width / 2,
+      canvas.height / 2.7,
+      `orange`
+    );
+    displayMessage(
+      `your score: ${score}`,
+      30,
+      canvas.width / 2,
+      canvas.height / 1.8,
+      `grey`
+    );
     /// displayMessage(`Your ${score}`);
     //restartContent.style.display = 'initial';
     restartBtn.style.display = 'initial';

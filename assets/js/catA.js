@@ -147,7 +147,7 @@ class CatA {
     setTimeout(() => {
       this.y -= 171 / 2;
       this._currentImage = this._walk;
-    }, 250);
+    }, 200);
 
     this.jumpAudio.play();
   }

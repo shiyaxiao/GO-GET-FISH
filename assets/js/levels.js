@@ -19,13 +19,13 @@ class Levels {
   constructor() {
     this._loadImages();
 
-    this._coins = this._createMultipleItems(Coin, 3);
-    this._goodFishes = this._createMultipleItems(GoodFish, 3);
-    this._badFishes = this._createMultipleItems(BadFish, 2);
+    this._coins = this._createMultipleItems(Coin, 5);
+    this._goodFishes = this._createMultipleItems(GoodFish, 2);
+    this._badFishes = this._createMultipleItems(BadFish, 3);
     this._bombs = this._createMultipleItems(Bomb, 1);
 
     this.coinAudio = document.createElement('audio');
-    this.coinAudio.src = 'assets/sound/coin.mp3';
+    this.coinAudio.src = 'assets/sound/coin.mov';
 
     this.goodFishAudio = document.createElement('audio');
     this.goodFishAudio.src = 'assets/sound/goodFish.wav';
@@ -34,7 +34,7 @@ class Levels {
     this.badFishAudio.src = 'assets/sound/badFish.wav';
 
     this.bombAudio = document.createElement('audio');
-    this.bombAudio.src = 'assets/sound/bomb.mp3';
+    this.bombAudio.src = 'assets/sound/bomb.mov';
   }
 
   _loadImages() {
@@ -47,7 +47,7 @@ class Levels {
 
   // options = { type, x, y, array }
   _createItem(options) {
-    options.x = options.x ?? getRandom(100, this.width);
+    options.x = options.x ?? getRandom(350, this.width);
     options.y = options.y ?? this._levelsY[getRandom(0, 2)];
     const newItem = new options.type(options.x, options.y);
     return newItem;
@@ -151,7 +151,7 @@ class Levels {
 
       // console.warn('hit GoodFish');
       this.goodFishAudio.play();
-      
+
       // increase the score
       score += updateScoreBy;
       document.getElementById('score').innerHTML = score;

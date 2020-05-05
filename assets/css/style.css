@@ -8,13 +8,21 @@
 }
 
 #score {
+  border: solid orange;
+  border-width: 4px;
+  height: 35px;
+  width: 120px;
+  border-radius: 33px;
+  background-color: rgb(255, 237, 204);
+
   position: absolute;
-  left: 100px;
-  top: 40px;
+  left: 60px;
+  top: 30px;
   color: orange;
   font-family: 'Roboto', sans-serif;
-  font-size: 30px;
-  font-weight: 900;
+  font-size: 25px;
+  font-weight: 700;
+  text-align: center;
 }
 
 /* #score div {
@@ -68,7 +76,7 @@
 .restart-button {
   position: absolute;
   left: 500px;
-  top: 350px;
+  top: 400px;
 
   height: 60px;
   width: 220px;
