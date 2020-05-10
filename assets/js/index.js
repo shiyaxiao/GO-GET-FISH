@@ -17,6 +17,7 @@ startBtn.onclick = function () {
 
   startScreen.style.display = 'none';
   tick();
+  backgroundAudio = document.getElementById('myAudio').loop;
 };
 
 const levels = new Levels();

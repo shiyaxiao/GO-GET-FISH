@@ -131,12 +131,7 @@ class Levels {
       document.getElementById('score').innerHTML = score;
 
       //score check to speed up
-      if (score > 25) {
-        this.speedX = 10;
-      }
-      if (score > 50) {
-        this.speedX = 12;
-      }
+      this.speedUp();
 
       // create a new item way off screen
       const x = getRandom(canvas.width + item.width, this.width);
@@ -166,12 +161,7 @@ class Levels {
       document.getElementById('score').innerHTML = score;
 
       //score check to speed up
-      if (score > 25) {
-        this.speedX = 10;
-      }
-      if (score > 50) {
-        this.speedX = 12;
-      }
+      this.speedUp();
 
       // create a new item way off screen
       const x = getRandom(canvas.width + item.width, this.width);
@@ -229,13 +219,11 @@ class Levels {
     });
   }
 
-// speedUp(){
-//   if (score/5) {
-
-//   }
-//   speedX+=
-// }
-
+  speedUp() {
+    if (score % 25 == 0) {
+      this.speedX += 4;
+    }
+  }
 
   endGame() {
     gameEnded = true;
